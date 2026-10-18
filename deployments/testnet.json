@@ -1,0 +1,2 @@
+{ "elysium": { "chainId": 99801, "ferryIn": "0x0", "exitDesk": "0x0", "feeJar": "0x0", "swapAdapter": "0x0", "whype": "0x0" },
+  "hyperevm": { "chainId": 998, "exitFactory": "0x0", "inbox": "0x11178Df40CBf87a4343f4B3F8B09B366ceFA8Ec0", "outbox": "0x87391D602aaffB3Fe8051EcCDb75d6EEe8C31060" } }

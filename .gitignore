@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.svelte-kit/
+.env
+.env.*
+!.env.example
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+keeper/bin/
+keeper/data/
+*.log
+.DS_Store

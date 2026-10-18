@@ -1,0 +1,10 @@
+{
+  "name": "ferryman",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "check": "pnpm --filter web check"
+  }
+}
