@@ -1,0 +1,155 @@
+/*
+ * Ferryman design tokens.
+ *
+ * Two rivers: "Parchment" (light) is bone paper and river ink; "Styx" (dark) is the river at
+ * night with bone type. One luminous accent, lantern amber, is reserved for the crossing itself:
+ * progress, the ferry's lantern, focus and the live state. Everything else stays quiet.
+ */
+
+:root {
+  /* Type */
+  --font-display: 'Newsreader Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-2xs: 0.6875rem; /* 11 */
+  --fs-xs: 0.75rem; /* 12 */
+  --fs-sm: 0.8125rem; /* 13 */
+  --fs-base: 0.9375rem; /* 15 */
+  --fs-md: 1.0625rem; /* 17 */
+  --fs-lg: 1.25rem; /* 20 */
+  --fs-xl: 1.625rem; /* 26 */
+  --fs-2xl: clamp(2rem, 1.4rem + 2.4vw, 2.875rem); /* 32 -> 46 */
+  --fs-3xl: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem); /* 40 -> 68 */
+
+  --lh-tight: 1.08;
+  --lh-snug: 1.3;
+  --lh-body: 1.55;
+
+  --tracking-display: -0.022em;
+  --tracking-caps: 0.08em;
+
+  /* Space (4px grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --gutter: clamp(16px, 4vw, 40px);
+
+  /* Shape */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-full: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 420ms;
+  --dur-crossing: 1400ms;
+
+  /* Layers */
+  --z-header: 20;
+  --z-popover: 40;
+  --z-toast: 60;
+
+  /* ---------- Parchment (light) ----------
+   The resolved theme is written to <html data-theme> before first paint (index.html),
+   from the saved choice or prefers-color-scheme. */
+  color-scheme: light;
+  --bg: #f3eee4;
+  --bg-raised: #fbf8f2;
+  --bg-sunken: #ebe4d6;
+  --bg-hover: rgba(22, 25, 28, 0.045);
+  --bg-press: rgba(22, 25, 28, 0.08);
+  --bg-inverse: #16191c;
+
+  --ink: #16191c;
+  --ink-2: #4b4f52;
+  --ink-3: #64665f;
+  --ink-inverse: #f3eee4;
+
+  --line: rgba(22, 25, 28, 0.1);
+  --line-2: rgba(22, 25, 28, 0.17);
+  --line-strong: rgba(22, 25, 28, 0.32);
+
+  --river: #1f4a55;
+  --river-soft: rgba(31, 74, 85, 0.1);
+  --river-wave: rgba(31, 74, 85, 0.22);
+
+  --lantern: #d9922e; /* fills, glows */
+  --lantern-ink: #8a5a14; /* text on paper (5.1:1) */
+  --lantern-soft: rgba(217, 146, 46, 0.14);
+  --lantern-glow: rgba(217, 146, 46, 0.45);
+  --on-lantern: #1a1206;
+
+  --focus: #a8660f; /* 4:1 against paper */
+
+  --success: #2d6a4f;
+  --success-soft: rgba(45, 106, 79, 0.1);
+  --danger: #9a3a2c;
+  --danger-soft: rgba(154, 58, 44, 0.09);
+  --warn: #8a5a14;
+  --warn-soft: rgba(217, 146, 46, 0.13);
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 1px 2px rgba(22, 25, 28, 0.04),
+    0 18px 40px -24px rgba(31, 40, 44, 0.22);
+  --shadow-pop: 0 1px 2px rgba(22, 25, 28, 0.06), 0 24px 60px -20px rgba(22, 25, 28, 0.32);
+  --scrim: rgba(22, 25, 28, 0.38);
+  --grain-opacity: 0.35;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d1214;
+  --bg-raised: #141b1e;
+  --bg-sunken: #0a0e10;
+  --bg-hover: rgba(236, 230, 217, 0.05);
+  --bg-press: rgba(236, 230, 217, 0.09);
+  --bg-inverse: #ece6d9;
+
+  --ink: #ece6d9;
+  --ink-2: #a7aca6;
+  --ink-3: #848a84;
+  --ink-inverse: #0d1214;
+
+  --line: rgba(236, 230, 217, 0.09);
+  --line-2: rgba(236, 230, 217, 0.15);
+  --line-strong: rgba(236, 230, 217, 0.3);
+
+  --river: #6fb3c1;
+  --river-soft: rgba(111, 179, 193, 0.1);
+  --river-wave: rgba(111, 179, 193, 0.2);
+
+  --lantern: #e9a846;
+  --lantern-ink: #efb562;
+  --lantern-soft: rgba(233, 168, 70, 0.13);
+  --lantern-glow: rgba(233, 168, 70, 0.55);
+  --on-lantern: #1a1206;
+
+  --focus: #e9a846;
+
+  --success: #78c09a;
+  --success-soft: rgba(120, 192, 154, 0.1);
+  --danger: #e07a64;
+  --danger-soft: rgba(224, 122, 100, 0.1);
+  --warn: #efb562;
+  --warn-soft: rgba(233, 168, 70, 0.12);
+
+  --shadow-card: 0 1px 0 rgba(236, 230, 217, 0.04) inset, 0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 24px 48px -28px rgba(0, 0, 0, 0.7);
+  --shadow-pop: 0 0 0 1px rgba(236, 230, 217, 0.06), 0 30px 70px -20px rgba(0, 0, 0, 0.75);
+  --scrim: rgba(4, 7, 8, 0.66);
+  --grain-opacity: 0.5;
+}
