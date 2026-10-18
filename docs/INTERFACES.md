@@ -60,9 +60,14 @@ function exitHYPE(address recipient, uint256 claimTip, bool toCore) external pay
 event Bought(address indexed token, address indexed recipient, uint256 hypeIn, uint256 fee, uint256 amountOut);
 event Refunded(address indexed token, address indexed recipient, uint256 hypeIn, bytes reason);
 function buy(address token, address recipient, uint256 minOut) external payable;
+// Token routes: registerToken(PoolKey key) is permissionless but requires key.hooks == LAUNCHPAD (immutable)
+// and an initialized pool; it stores the token's pool key. HYPE -> quote-currency pool keys are fixed in the
+// constructor (one per supported quote currency). Unregistered token => refund, never revert.
+event TokenRegistered(address indexed token, address indexed quoteCurrency, PoolKey key);
+function poolKeyOf(address token) external view returns (PoolKey memory);
 // fee = msg.value * 30 / 10_000 -> FeeJar. Rest swapped via adapter inside try/catch. On failure the
 // full msg.value (fee included) is refunded to recipient. Never reverts on swap failure.
-function quote(address token, uint256 hypeIn) external returns (uint256 amountOut); // for eth_call only
+function quote(address token, uint256 hypeIn) external returns (uint256 amountOut); // eth_call only; net of fee
 
 // FeeJar: receive() payable; immutable beneficiary (fee router). release() is permissionless and sends balance to beneficiary.
 // InfinitySwapAdapter: see contracts/README.md (route = HYPE -> quote currency -> token through Infinity CL pools).
@@ -130,10 +135,11 @@ type StuckWithdrawal = { messageId: number; owner: string; amount: string; origi
 
 ## 4. Explorer API (Blockscout, Arbitrum-flavoured) used by the keeper
 
-- `GET /api/v2/arbitrum/messages/from-rollup?…` paged (`next_page_params`), items carry `id`, `status`, `origination_transaction_hash`, `origination_timestamp`, `completion_transaction_hash`, `origination_address`.
-- `GET /api/v2/arbitrum/messages/to-rollup` for retryables.
-- `GET /api/v2/arbitrum/messages/claim/{id}` returns ready-made Outbox calldata (`{ "calldata": "0x08635a95…", "outbox_address": "0x…" }`).
-- Exact field names are recorded in `docs/RESEARCH.md`.
+See `docs/RESEARCH.md` section 4 for full shapes. Summary:
+- `GET /api/v2/arbitrum/messages/from-rollup?id=<cursor>`: id-descending pages of 50, `next_page_params: {"id": n}`. Items: `id, origination_address_hash, origination_transaction_hash, origination_timestamp, origination_transaction_block_number, completion_transaction_hash, status` (`initiated|sent|confirmed|relayed`). No filters.
+- `GET /api/v2/arbitrum/messages/to-rollup?id=<cursor>`: same shape, retryables/deposits.
+- `GET /api/v2/arbitrum/messages/withdrawals/{l2TxHash}`: `{items:[{id, status, caller_address_hash, destination_address_hash, callvalue, completion_transaction_hash, ...}]}`. Use this to find the real owner (`destination_address_hash`) and the message id of an exit.
+- `GET /api/v2/arbitrum/messages/claim/{id}`: `{calldata, outbox_address_hash}` (older builds: `outbox_address`; accept both). 400 "unconfirmed yet" = retry later, 400 "executed already" = skip.
 
 ## 5. Deployments file
 
