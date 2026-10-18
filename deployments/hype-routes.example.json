@@ -1,0 +1,22 @@
+{
+  "routes": [
+    {
+      "_comment": "HYPE (native, address(0)) -> quote currency A. Example values only; replace with the real Elysium pool key.",
+      "currency0": "0x0000000000000000000000000000000000000000",
+      "currency1": "0x1111111111111111111111111111111111111111",
+      "hooks": "0x0000000000000000000000000000000000000000",
+      "poolManager": "0x2222222222222222222222222222222222222222",
+      "fee": 3000,
+      "parameters": "0x0000000000000000000000000000000000000000000000000000000000003c00"
+    },
+    {
+      "_comment": "WHYPE -> quote currency B. Use this when the Elysium pool holds WHYPE, not native HYPE.",
+      "currency0": "0xCD57F65c2B0e5881CFC2E609F7CD53b746E1F234",
+      "currency1": "0x3333333333333333333333333333333333333333",
+      "hooks": "0x0000000000000000000000000000000000000000",
+      "poolManager": "0x2222222222222222222222222222222222222222",
+      "fee": 3000,
+      "parameters": "0x0000000000000000000000000000000000000000000000000000000000003c00"
+    }
+  ]
+}

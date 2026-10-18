@@ -9,3 +9,6 @@ evm_version = "cancun"
 optimizer = true
 optimizer_runs = 200
 via_ir = false
+
+# Deploy scripts read HYPE route JSON from ../deployments (read-only).
+fs_permissions = [{ access = "read", path = "../deployments" }]

@@ -302,7 +302,6 @@ contract ExitFactoryTest is FerryFixture {
         assertFalse(evil.reentrySucceeded());
         assertEq(address(evil).balance, AMOUNT);
     }
-
 }
 
 /// @dev Tries to re-enter claimAndSweep when it receives HYPE.
